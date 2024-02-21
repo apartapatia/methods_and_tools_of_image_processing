@@ -1,0 +1,3 @@
+D:/шлак учебный/Методы и средства обработки изображений/Statistical_analysis_of_digital_images/cmake-build-debug/CMakeFiles/Statistical_analysis_of_digital_images.dir
+D:/шлак учебный/Методы и средства обработки изображений/Statistical_analysis_of_digital_images/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/шлак учебный/Методы и средства обработки изображений/Statistical_analysis_of_digital_images/cmake-build-debug/CMakeFiles/rebuild_cache.dir

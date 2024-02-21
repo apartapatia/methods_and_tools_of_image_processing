@@ -1,0 +1,19 @@
+# ninja log v5
+2	753	7302187244459960	CMakeFiles/Statistical_analysis_of_digital_images.dir/main.cpp.obj	9ba598d1b91a1c64
+931	1027	7302187247167925	Statistical_analysis_of_digital_images.exe	9596553e7213f73f
+4	931	7302187246235164	CMakeFiles/Statistical_analysis_of_digital_images.dir/bmp/bmp.cpp.obj	6eaeaa0923eb620d
+3	676	7302190943165707	CMakeFiles/Statistical_analysis_of_digital_images.dir/main.cpp.obj	9ba598d1b91a1c64
+5	836	7302190944733668	CMakeFiles/Statistical_analysis_of_digital_images.dir/bmp/bmp.cpp.obj	6eaeaa0923eb620d
+836	931	7302190945689966	Statistical_analysis_of_digital_images.exe	9596553e7213f73f
+2	653	7302191746031958	CMakeFiles/Statistical_analysis_of_digital_images.dir/main.cpp.obj	9ba598d1b91a1c64
+4	811	7302191747596880	CMakeFiles/Statistical_analysis_of_digital_images.dir/bmp/bmp.cpp.obj	6eaeaa0923eb620d
+811	902	7302191748495199	Statistical_analysis_of_digital_images.exe	9596553e7213f73f
+2	665	7302192566845344	CMakeFiles/Statistical_analysis_of_digital_images.dir/main.cpp.obj	9ba598d1b91a1c64
+4	843	7302192568621050	CMakeFiles/Statistical_analysis_of_digital_images.dir/bmp/bmp.cpp.obj	6eaeaa0923eb620d
+843	938	7302192569547485	Statistical_analysis_of_digital_images.exe	9596553e7213f73f
+3	673	7302194311135330	CMakeFiles/Statistical_analysis_of_digital_images.dir/main.cpp.obj	9ba598d1b91a1c64
+5	844	7302194312836983	CMakeFiles/Statistical_analysis_of_digital_images.dir/bmp/bmp.cpp.obj	6eaeaa0923eb620d
+844	939	7302194313776654	Statistical_analysis_of_digital_images.exe	9596553e7213f73f
+2	668	7302194765986063	CMakeFiles/Statistical_analysis_of_digital_images.dir/main.cpp.obj	9ba598d1b91a1c64
+4	841	7302194767671332	CMakeFiles/Statistical_analysis_of_digital_images.dir/bmp/bmp.cpp.obj	6eaeaa0923eb620d
+842	934	7302194768598746	Statistical_analysis_of_digital_images.exe	9596553e7213f73f
