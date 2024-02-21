@@ -61,6 +61,12 @@ build CMakeFiles/Statistical_analysis_of_digital_images.dir/bmp/bmp.cpp.obj: CXX
   OBJECT_DIR = CMakeFiles\Statistical_analysis_of_digital_images.dir
   OBJECT_FILE_DIR = CMakeFiles\Statistical_analysis_of_digital_images.dir\bmp
 
+build CMakeFiles/Statistical_analysis_of_digital_images.dir/test/correlation.cpp.obj: CXX_COMPILER__Statistical_analysis_of_digital_images_unscanned_Debug D$:/шлак$ учебный/Методы$ и$ средства$ обработки$ изображений/Statistical_analysis_of_digital_images/test/correlation.cpp || cmake_object_order_depends_target_Statistical_analysis_of_digital_images
+  DEP_FILE = CMakeFiles\Statistical_analysis_of_digital_images.dir\test\correlation.cpp.obj.d
+  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Statistical_analysis_of_digital_images.dir
+  OBJECT_FILE_DIR = CMakeFiles\Statistical_analysis_of_digital_images.dir\test
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Statistical_analysis_of_digital_images
@@ -69,7 +75,7 @@ build CMakeFiles/Statistical_analysis_of_digital_images.dir/bmp/bmp.cpp.obj: CXX
 #############################################
 # Link the executable Statistical_analysis_of_digital_images.exe
 
-build Statistical_analysis_of_digital_images.exe: CXX_EXECUTABLE_LINKER__Statistical_analysis_of_digital_images_Debug CMakeFiles/Statistical_analysis_of_digital_images.dir/main.cpp.obj CMakeFiles/Statistical_analysis_of_digital_images.dir/bmp/bmp.cpp.obj
+build Statistical_analysis_of_digital_images.exe: CXX_EXECUTABLE_LINKER__Statistical_analysis_of_digital_images_Debug CMakeFiles/Statistical_analysis_of_digital_images.dir/main.cpp.obj CMakeFiles/Statistical_analysis_of_digital_images.dir/bmp/bmp.cpp.obj CMakeFiles/Statistical_analysis_of_digital_images.dir/test/correlation.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Statistical_analysis_of_digital_images.dir

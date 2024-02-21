@@ -72,6 +72,11 @@ public:
                   _info_header.bi_colors_used << " " <<
                   _info_header.bi_colors_important << " " << std::endl;
     }
+
+    double calculate_mathematical_expectation(char component) const;
+    double calculate_the_standard_deviation_estimate(char component) const;
+    double calculate_rgb_correlation(char component1, char component2);
+    static int get_component_index(char component);
 };
 
 #endif
