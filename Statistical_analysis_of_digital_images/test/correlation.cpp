@@ -82,6 +82,38 @@ double BMP::calculate_rgb_correlation(char component1, char component2) {
     return correlation;
 }
 
+double BMP::calculate_autocorrelation(char component, int x_shift, int y_shift) {
+    if (_info_header.bi_width == 0 || _info_header.bi_height == 0) {
+        throw std::runtime_error("Image dimensions are invalid.");
+    }
+
+    double mean_intensity = calculate_mathematical_expectation(component);
+    int component_index = get_component_index(component);
+
+    double sum_autocorrelation = 0.0;
+    int count = 0;
+
+    for (int i = 0; i < _info_header.bi_height; ++i) {
+        for (int j = 0; j < _info_header.bi_width; ++j) {
+            if (i + y_shift >= 0 && i + y_shift < _info_header.bi_height &&
+                j + x_shift >= 0 && j + x_shift < _info_header.bi_width) {
+                double pixel_intensity1 = _data[(i * _info_header.bi_width + j) * 3 + component_index];
+                double pixel_intensity2 = _data[((i + y_shift) * _info_header.bi_width + (j + x_shift)) * 3 + component_index];
+                sum_autocorrelation += (pixel_intensity1 - mean_intensity) * (pixel_intensity2 - mean_intensity);
+                count++;
+                }
+        }
+    }
+
+    if (count == 0) {
+        throw std::runtime_error("Shift values are too large.");
+    }
+
+    double normalization_factor = 1.0 / count;
+
+    return sum_autocorrelation * normalization_factor;
+}
+
 
 int BMP::get_component_index(char component) {
     int component_index;

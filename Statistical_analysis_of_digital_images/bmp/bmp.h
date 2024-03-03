@@ -73,10 +73,17 @@ public:
                   _info_header.bi_colors_important << " " << std::endl;
     }
 
-    double calculate_mathematical_expectation(char component) const;
-    double calculate_the_standard_deviation_estimate(char component) const;
+    [[nodiscard]] double calculate_mathematical_expectation(char component) const;
+    [[nodiscard]] double calculate_the_standard_deviation_estimate(char component) const;
     double calculate_rgb_correlation(char component1, char component2);
     static int get_component_index(char component);
+    double calculate_autocorrelation(char component, int x_shift, int y_shift);
+    static BMP RGB_to_YCbCr(const std::vector<uint8_t>& rgbData, const std::string& fname);
+    int get_component_index_ycbcr(char component);
+
+    [[nodiscard]] const std::vector<uint8_t>& get_data() const {
+        return _data;
+    }
 };
 
 #endif

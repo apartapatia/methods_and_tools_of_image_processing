@@ -7,4 +7,6 @@ add_executable(Statistical_analysis_of_digital_images main.cpp
         bmp/bmp.h
         bmp/bmp.cpp
         test/correlation.h
-        test/correlation.cpp)
+        test/correlation.cpp
+        YCbCr/YCbCr.cpp
+        YCbCr/YCbCr.h)
