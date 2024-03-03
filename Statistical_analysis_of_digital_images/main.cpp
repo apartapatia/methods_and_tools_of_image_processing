@@ -1,15 +1,42 @@
 #include "bmp/bmp.h"
-#include "test/correlation.h"
+#include <iomanip>
+#include <windows.h>
 
-using namespace std;
+void setConsoleColor(int color) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, color);
+}
 
-int main(int argc, char* argv[]) {
+void drawRectangleWithText(const std::string& text, int width, int height) {
+    int padding = (width - text.length()) / 2;
 
+    setConsoleColor(10);
+    std::cout << std::setfill('~') << std::setw(width + 2) << "" << std::endl;
+
+    for (int i = 0; i < height; ++i) {
+        std::cout << "~";
+        if (i == height / 2) {
+            setConsoleColor(10);
+            std::cout << std::setw(padding + 1) << "" << text << std::setw(padding) << "";
+        } else {
+            std::cout << std::setw(width) << "";
+        }
+        std::cout << "~" << std::endl;
+    }
+
+    std::cout << std::setfill('~') << std::setw(width + 2) << "" << std::endl;
+
+    setConsoleColor(7);
+}
+
+int main() {
     // // 2 - 3 пункты
     // BMP f("catcat");
     // f.save_file_by_component("catcat", 'r');
     // f.save_file_by_component("catcat", 'g');
     // f.save_file_by_component("catcat", 'b');
+
+    drawRectangleWithText("point 2 - 3", 20, 1);
 
     BMP f_1("kodim14");
     f_1.save_file_by_component("kodim14", 'r');
@@ -24,6 +51,7 @@ int main(int argc, char* argv[]) {
 
 
     // 4 пункт
+    drawRectangleWithText("point 4", 20, 1);
     double mean_intensity_r_g = f_1.calculate_rgb_correlation('r', 'g');
     double mean_intensity_r_b = f_1.calculate_rgb_correlation('r', 'b');
     double mean_intensity_b_g = f_1.calculate_rgb_correlation('b', 'g');
@@ -42,7 +70,8 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    // TODO 5 пункт
+    // TODO 5 пункт r - y, g - Cb, b - Cr
+    drawRectangleWithText("point 5", 20, 1);
 
 
     return 0;

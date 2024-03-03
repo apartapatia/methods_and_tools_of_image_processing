@@ -81,10 +81,11 @@ void BMP::save_file_by_component(const std::string& fname, const char mod) {
 BMP BMP::RGB_to_YCbCr(const std::vector<uint8_t>& rgbData, const std::string& fname) {
     BMP ycbcrBmp(fname);
 
-    std::vector<uint8_t> yData, cbData, crData;
+    std::vector<uint8_t> yData, cbData, crData, ycbcrData;
     yData.reserve(rgbData.size());
     cbData.reserve(rgbData.size());
     crData.reserve(rgbData.size());
+    ycbcrData.reserve(rgbData.size());
 
     for (size_t i = 0; i < rgbData.size(); i += 3) {
         uint8_t R = rgbData[i];
@@ -96,13 +97,17 @@ BMP BMP::RGB_to_YCbCr(const std::vector<uint8_t>& rgbData, const std::string& fn
         auto Cr = static_cast<uint8_t>(128 + 0.7132 * (R - Y));
 
         yData.push_back(Y);
+        ycbcrData.push_back(Y);
         cbData.push_back(Cb);
+        ycbcrData.push_back(Cb);
         crData.push_back(Cr);
+        ycbcrData.push_back(Cr);
     }
 
     ycbcrBmp.save_file(fname + "_Y_component", yData);
     ycbcrBmp.save_file(fname + "_Cb_component", cbData);
     ycbcrBmp.save_file(fname + "_Cr_component", crData);
+    ycbcrBmp.save_file(fname + "_YCbCr_component", ycbcrData);
 
     return ycbcrBmp;
 }
