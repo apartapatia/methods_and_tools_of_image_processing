@@ -91,17 +91,24 @@ double BMP::calculate_autocorrelation(char component, int x_shift, int y_shift) 
     int component_index = get_component_index(component);
 
     double sum_autocorrelation = 0.0;
+    double sum_squared_deviation1 = 0.0;
+    double sum_squared_deviation2 = 0.0;
     int count = 0;
 
     for (int i = 0; i < _info_header.bi_height; ++i) {
         for (int j = 0; j < _info_header.bi_width; ++j) {
-            if (i + y_shift >= 0 && i + y_shift < _info_header.bi_height &&
-                j + x_shift >= 0 && j + x_shift < _info_header.bi_width) {
+            int neighbor_i = i + y_shift;
+            int neighbor_j = j + x_shift;
+
+            if (neighbor_i >= 0 && neighbor_i < _info_header.bi_height && neighbor_j >= 0 && neighbor_j < _info_header.bi_width) {
                 double pixel_intensity1 = _data[(i * _info_header.bi_width + j) * 3 + component_index];
-                double pixel_intensity2 = _data[((i + y_shift) * _info_header.bi_width + (j + x_shift)) * 3 + component_index];
+                double pixel_intensity2 = _data[(neighbor_i * _info_header.bi_width + neighbor_j) * 3 + component_index];
+
                 sum_autocorrelation += (pixel_intensity1 - mean_intensity) * (pixel_intensity2 - mean_intensity);
+                sum_squared_deviation1 += (pixel_intensity1 - mean_intensity) * (pixel_intensity1 - mean_intensity);
+                sum_squared_deviation2 += (pixel_intensity2 - mean_intensity) * (pixel_intensity2 - mean_intensity);
                 count++;
-                }
+            }
         }
     }
 
@@ -109,11 +116,35 @@ double BMP::calculate_autocorrelation(char component, int x_shift, int y_shift) 
         throw std::runtime_error("Shift values are too large.");
     }
 
-    double normalization_factor = 1.0 / count;
+    double correlation = sum_autocorrelation / sqrt(sum_squared_deviation1 * sum_squared_deviation2);
 
-    return sum_autocorrelation * normalization_factor;
+    return correlation;
 }
 
+double BMP::calculate_PSNR(char component) const {
+    if (_info_header.bi_width == 0 || _info_header.bi_height == 0) {
+        throw std::runtime_error("Image dimensions are invalid.");
+    }
+
+    double mean_intensity = calculate_mathematical_expectation(component);
+    int component_index = get_component_index(component);
+
+    double sum_squared_deviations = 0.0;
+
+    for (int i = 0; i < _info_header.bi_height; ++i) {
+        for (int j = 0; j < _info_header.bi_width; ++j) {
+            double pixel_intensity = _data[(i * _info_header.bi_width + j) * 3 + component_index];
+            double deviation = pixel_intensity - mean_intensity;
+            sum_squared_deviations += deviation * deviation;
+        }
+    }
+
+    int W = _info_header.bi_width;
+    int H = _info_header.bi_height;
+    double normalization_factor = W * H * pow((pow(2, 24) - 1), 2);
+
+    return log10(normalization_factor / sum_squared_deviations);
+}
 
 int BMP::get_component_index(char component) {
     int component_index;

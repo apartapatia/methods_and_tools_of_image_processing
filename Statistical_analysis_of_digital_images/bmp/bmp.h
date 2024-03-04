@@ -78,8 +78,11 @@ public:
     double calculate_rgb_correlation(char component1, char component2);
     static int get_component_index(char component);
     double calculate_autocorrelation(char component, int x_shift, int y_shift);
-    static BMP RGB_to_YCbCr(const std::vector<uint8_t>& rgbData, const std::string& fname);
+    static void RGB_to_YCbCr(const std::vector<uint8_t>& rgbData, const std::string& fname);
     int get_component_index_ycbcr(char component);
+    static void YCbCr_to_RGB(const std::vector<uint8_t>& ycbcrData, const std::string& fname);
+    double calculate_PSNR(char component) const;
+
 
     [[nodiscard]] const std::vector<uint8_t>& get_data() const {
         return _data;
