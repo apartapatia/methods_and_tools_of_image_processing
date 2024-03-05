@@ -133,7 +133,7 @@ double BMP::calculate_PSNR(const BMP& otherBMP, char component) const {
     for (int i = 0; i < _info_header.bi_height; ++i) {
         for (int j = 0; j < _info_header.bi_width; ++j) {
             double pixel_intensity_original = _data[(i * _info_header.bi_width + j) * 3 + component_index];
-            double pixel_intensity_restore = otherBMP.get_data()[(i * otherBMP.get_info_header_bi_size() + j) * 3 + component_index];
+            double pixel_intensity_restore = otherBMP._data[(i * otherBMP._info_header.bi_width + j) * 3 + component_index];
             double deviation = pixel_intensity_original - pixel_intensity_restore;
             sum_squared_deviations += deviation * deviation;
         }
@@ -141,7 +141,8 @@ double BMP::calculate_PSNR(const BMP& otherBMP, char component) const {
 
     int W = _info_header.bi_width;
     int H = _info_header.bi_height;
-    double normalization_factor = W * H * pow((pow(2, _info_header.bi_bit_count / 3) - 1), 2);
+    const int bit_count = _info_header.bi_bit_count / 3;
+    double normalization_factor = W * H * pow((pow(2, bit_count) - 1), 2);
 
     return 10 * log10(normalization_factor / sum_squared_deviations);
 }
