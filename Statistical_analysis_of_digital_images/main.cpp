@@ -88,24 +88,14 @@ int main() {
     std::cout << "Mean Intensity between cr and cb: " << mean_intensity_cr_cb << std::endl;
 
     // пункт 7
-
-    double PSNR_B = f_1.calculate_PSNR('b');
-    double PSNR_G = f_1.calculate_PSNR('g');
-    double PSNR_R = f_1.calculate_PSNR('r');
-
-    double PSNR_B_restore = f_ycbcr.calculate_PSNR('b');
-    double PSNR_G_restore = f_ycbcr.calculate_PSNR('g');
-    double PSNR_R_restore = f_ycbcr.calculate_PSNR('r');
+    drawRectangleWithText("point 7", 20, 1, 10);
+    double PSNR_B = f_1.calculate_PSNR(f_rbg, 'b');
+    double PSNR_G = f_1.calculate_PSNR(f_rbg, 'g');
+    double PSNR_R = f_1.calculate_PSNR(f_rbg, 'r');
 
     std::cout << "PSNR for component b: " << PSNR_B << std::endl;
     std::cout << "PSNR for component g: " << PSNR_G << std::endl;
     std::cout << "PSNR for component r: " << PSNR_R << std::endl;
-
-    std::cout << std::endl;
-    std::cout << "PSNR_restore for component b: " << PSNR_B_restore << std::endl;
-    std::cout << "PSNR_restore for component g: " << PSNR_G_restore << std::endl;
-    std::cout << "PSNR_restore for component r: " << PSNR_R_restore << std::endl;
-
 
     return 0;
 }

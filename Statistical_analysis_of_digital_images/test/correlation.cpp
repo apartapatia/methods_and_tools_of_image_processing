@@ -121,29 +121,29 @@ double BMP::calculate_autocorrelation(char component, int x_shift, int y_shift) 
     return correlation;
 }
 
-double BMP::calculate_PSNR(char component) const {
+double BMP::calculate_PSNR(const BMP& otherBMP, char component) const {
     if (_info_header.bi_width == 0 || _info_header.bi_height == 0) {
         throw std::runtime_error("Image dimensions are invalid.");
     }
 
-    double mean_intensity = calculate_mathematical_expectation(component);
     int component_index = get_component_index(component);
 
     double sum_squared_deviations = 0.0;
 
     for (int i = 0; i < _info_header.bi_height; ++i) {
         for (int j = 0; j < _info_header.bi_width; ++j) {
-            double pixel_intensity = _data[(i * _info_header.bi_width + j) * 3 + component_index];
-            double deviation = pixel_intensity - mean_intensity;
+            double pixel_intensity_original = _data[(i * _info_header.bi_width + j) * 3 + component_index];
+            double pixel_intensity_restore = otherBMP.get_data()[(i * otherBMP.get_info_header_bi_size() + j) * 3 + component_index];
+            double deviation = pixel_intensity_original - pixel_intensity_restore;
             sum_squared_deviations += deviation * deviation;
         }
     }
 
     int W = _info_header.bi_width;
     int H = _info_header.bi_height;
-    double normalization_factor = W * H * pow((pow(2, 24) - 1), 2);
+    double normalization_factor = W * H * pow((pow(2, _info_header.bi_bit_count / 3) - 1), 2);
 
-    return log10(normalization_factor / sum_squared_deviations);
+    return 10 * log10(normalization_factor / sum_squared_deviations);
 }
 
 int BMP::get_component_index(char component) {

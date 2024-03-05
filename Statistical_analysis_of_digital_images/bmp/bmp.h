@@ -81,11 +81,15 @@ public:
     static void RGB_to_YCbCr(const std::vector<uint8_t>& rgbData, const std::string& fname);
     int get_component_index_ycbcr(char component);
     static void YCbCr_to_RGB(const std::vector<uint8_t>& ycbcrData, const std::string& fname);
-    double calculate_PSNR(char component) const;
+    double calculate_PSNR(const BMP& otherBMP, char component) const;
 
 
     [[nodiscard]] const std::vector<uint8_t>& get_data() const {
         return _data;
+    }
+
+    [[nodiscard]] uint32_t get_info_header_bi_size() const {
+        return _info_header.bi_size;
     }
 };
 

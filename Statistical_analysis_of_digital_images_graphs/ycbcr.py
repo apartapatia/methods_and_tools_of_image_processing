@@ -24,7 +24,6 @@ plt.subplot(133)
 plt.title("Cr")
 plt.imshow(cr, cmap="gray")
 
-
 directory = os.path.dirname(os.path.abspath("kodim14.bmp"))
 
 y.save(os.path.join(directory, "Y_channel.bmp"))
