@@ -83,7 +83,6 @@ public:
     static void YCbCr_to_RGB(const std::vector<uint8_t>& ycbcrData, const std::string& fname);
     double calculate_PSNR(const BMP& otherBMP, char component) const;
 
-
     [[nodiscard]] const std::vector<uint8_t>& get_data() const {
         return _data;
     }

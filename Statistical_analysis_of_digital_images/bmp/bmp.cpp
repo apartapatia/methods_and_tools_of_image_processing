@@ -117,6 +117,9 @@ void BMP::RGB_to_YCbCr(const std::vector<uint8_t>& rgbData, const std::string& f
 
 }
 
+int Sat(int x, int xmin, int xmax) {
+    return (x < xmin) ? xmin : (x > xmax) ? xmax : x;
+}
 
 void BMP::YCbCr_to_RGB(const std::vector<uint8_t>& ycbcrData, const std::string& fname) {
     BMP rgbBmp(fname);
@@ -129,9 +132,9 @@ void BMP::YCbCr_to_RGB(const std::vector<uint8_t>& ycbcrData, const std::string&
         uint8_t Cb = ycbcrData[i + 1];
         uint8_t Cr = ycbcrData[i + 2];
 
-        auto R = static_cast<uint8_t>(Y + 1.402 * (Cr - 128));
-        auto G = static_cast<uint8_t>(Y - 0.714 * (Cr - 128) - 0.334 * (Cb - 128));
-        auto B = static_cast<uint8_t>(Y + 1.772 * (Cb - 128));
+        auto R = static_cast<uint8_t>(Sat(Y + 1.402 * (Cr - 128), 0, 255));
+        auto G = static_cast<uint8_t>(Sat(Y - 0.714 * (Cr - 128) - 0.334 * (Cb - 128), 0, 255));
+        auto B = static_cast<uint8_t>(Sat(Y + 1.772 * (Cb - 128), 0, 255));
 
         rgbData.push_back(R);
         rgbData.push_back(G);
@@ -139,8 +142,8 @@ void BMP::YCbCr_to_RGB(const std::vector<uint8_t>& ycbcrData, const std::string&
     }
 
     rgbBmp.save_file(fname + "_RGB_from_YCbCr", rgbData);
-
 }
+
 
 
 
