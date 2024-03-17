@@ -101,6 +101,24 @@ int main() {
     // дополнительное задание
     drawRectangleWithText("non main task", 20, 1, 10);
     f_1.RGB_to_YCbCr_with_bit_planes(f_1.get_data(), "kodim14");
+    BMP f_7bit_plane("kodim14_Y0_bit_plane");
+    BMP f_6bit_plane("kodim14_Y1_bit_plane");
+    BMP f_5bit_plane("kodim14_Y2_bit_plane");
+    BMP f_4bit_plane("kodim14_Y3_bit_plane");
+    BMP f_3bit_plane("kodim14_Y4_bit_plane");
+    BMP f_2bit_plane("kodim14_Y5_bit_plane");
+    BMP f_1bit_plane("kodim14_Y6_bit_plane");
+    BMP f_0bit_plane("kodim14_Y7_bit_plane");
+
+    std::cout << "Entropy of 7-bit plane (f_7bit_plane): " << f_7bit_plane.calculate_entropy('b') << std::endl;
+    std::cout << "Entropy of 6-bit plane (f_6bit_plane): " << f_6bit_plane.calculate_entropy('b') << std::endl;
+    std::cout << "Entropy of 5-bit plane (f_5bit_plane): " << f_5bit_plane.calculate_entropy('b') << std::endl;
+    std::cout << "Entropy of 4-bit plane (f_4bit_plane): " << f_4bit_plane.calculate_entropy('b') << std::endl;
+    std::cout << "Entropy of 3-bit plane (f_3bit_plane): " << f_3bit_plane.calculate_entropy('b') << std::endl;
+    std::cout << "Entropy of 2-bit plane (f_2bit_plane): " << f_2bit_plane.calculate_entropy('b') << std::endl;
+    std::cout << "Entropy of 1-bit plane (f_1bit_plane): " << f_1bit_plane.calculate_entropy('b') << std::endl;
+    std::cout << "Entropy of 0-bit plane (f_0bit_plane): " << f_0bit_plane.calculate_entropy('b') << std::endl;
+
 
 
     return 0;

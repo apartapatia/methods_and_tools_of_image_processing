@@ -83,10 +83,10 @@ void BMP::RGB_to_YCbCr(const std::vector<uint8_t>& rgbData, const std::string& f
     BMP ycbcrBmp(fname);
 
     std::vector<uint8_t> yData, cbData, crData, ycbcrData;
-    yData.reserve(rgbData.size());
-    cbData.reserve(rgbData.size());
-    crData.reserve(rgbData.size());
-    ycbcrData.reserve(rgbData.size());
+    yData.reserve(rgbData.size() / 3 * 2);
+    cbData.reserve(rgbData.size() / 3 * 2);
+    crData.reserve(rgbData.size() / 3 * 2);
+    ycbcrData.reserve(rgbData.size() / 3 * 2);
 
     for (size_t i = 0; i < rgbData.size(); i += 3) {
         uint8_t R = rgbData[i];

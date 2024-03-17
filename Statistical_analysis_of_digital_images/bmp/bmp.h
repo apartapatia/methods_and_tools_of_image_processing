@@ -84,7 +84,8 @@ public:
     static void YCbCr_to_RGB(const std::vector<uint8_t>& ycbcrData, const std::string& fname);
     double calculate_PSNR(const BMP& otherBMP, char component) const;
     static void RGB_to_YCbCr_with_bit_planes(const std::vector<uint8_t>& rgbData, const std::string& fname);
-
+    std::map<int, double> calculate_probability(char component) const;
+    double calculate_entropy(char component) const;
 
     [[nodiscard]] const std::vector<uint8_t>& get_data() const {
         return _data;

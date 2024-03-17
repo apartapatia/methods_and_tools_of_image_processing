@@ -149,6 +149,42 @@ double BMP::calculate_PSNR(const BMP& otherBMP, char component) const {
     return 10 * log10(normalization_factor / sum_squared_deviations);
 }
 
+std::map<int, double> BMP::calculate_probability(char component) const {
+    std::map<int, int> count_map;
+    int component_index = get_component_index(component);
+
+    for (int i = 0; i < _info_header.bi_height; ++i) {
+        for (int j = 0; j < _info_header.bi_width; ++j) {
+            int pixel_intensity = _data[(i * _info_header.bi_width + j) * (_info_header.bi_bit_count / 8) + component_index];
+            count_map[pixel_intensity]++;
+        }
+    }
+
+    std::map<int, double> probability_map;
+    int total_pixels = _info_header.bi_width * _info_header.bi_height;
+
+    for (const auto& pair : count_map) {
+        probability_map[pair.first] = static_cast<double>(pair.second) / total_pixels;
+    }
+
+    return probability_map;
+}
+
+double BMP::calculate_entropy(char component) const {
+    std::map<int, double> probability_map = calculate_probability(component);
+    double entropy = 0.0;
+
+    for (const auto& pair : probability_map) {
+        double p_x = pair.second;
+        if (p_x > 0) {
+            entropy -= p_x * log2(p_x);
+        }
+    }
+
+    return entropy;
+}
+
+
 int BMP::get_component_index(char component) {
     int component_index;
 
