@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <windows.h>
 
+
 void setConsoleColor(int color) {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole, color);
@@ -96,6 +97,11 @@ int main() {
     std::cout << "PSNR for component b: " << PSNR_B << std::endl;
     std::cout << "PSNR for component g: " << PSNR_G << std::endl;
     std::cout << "PSNR for component r: " << PSNR_R << std::endl;
+
+    // дополнительное задание
+    drawRectangleWithText("non main task", 20, 1, 10);
+    f_1.RGB_to_YCbCr_with_bit_planes(f_1.get_data(), "kodim14");
+
 
     return 0;
 }

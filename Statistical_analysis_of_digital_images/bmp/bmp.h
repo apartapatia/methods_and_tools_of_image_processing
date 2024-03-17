@@ -8,6 +8,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <filesystem>
+#include <map>
 
 namespace fs = std::filesystem;
 
@@ -82,6 +83,8 @@ public:
     int get_component_index_ycbcr(char component);
     static void YCbCr_to_RGB(const std::vector<uint8_t>& ycbcrData, const std::string& fname);
     double calculate_PSNR(const BMP& otherBMP, char component) const;
+    static void RGB_to_YCbCr_with_bit_planes(const std::vector<uint8_t>& rgbData, const std::string& fname);
+
 
     [[nodiscard]] const std::vector<uint8_t>& get_data() const {
         return _data;

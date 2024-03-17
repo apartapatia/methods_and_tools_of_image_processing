@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <filesystem>
+#include <memory_resource>
 
 namespace fs = std::filesystem;
 
@@ -143,6 +144,41 @@ void BMP::YCbCr_to_RGB(const std::vector<uint8_t>& ycbcrData, const std::string&
 
     rgbBmp.save_file(fname + "_RGB_from_YCbCr", rgbData);
 }
+
+void BMP::RGB_to_YCbCr_with_bit_planes(const std::vector<uint8_t>& rgbData, const std::string& fname) {
+    BMP ycbcrBmp(fname);
+
+    std::vector<uint8_t> yData;
+    yData.reserve(rgbData.size());
+
+    std::vector yBitPlanes(8, std::vector<uint8_t>(rgbData.size() / 3, 0));
+
+    for (size_t i = 0; i < rgbData.size(); i += 3) {
+        uint8_t R = rgbData[i];
+        uint8_t G = rgbData[i + 1];
+        uint8_t B = rgbData[i + 2];
+
+        auto Y = static_cast<uint8_t>(0.299 * R + 0.587 * G + 0.114 * B);
+
+        yData.push_back(Y);
+
+        for (int bit = 0; bit < 8; ++bit) {
+            yBitPlanes[bit][i / 3] = (Y >> (7 - bit)) & 1;
+        }
+    }
+
+    ycbcrBmp.save_file(fname + "_Y_component", yData);
+
+    // Save bit planes
+    for (int i = 0; i < 8; ++i) {
+        std::vector<uint8_t> bitPlaneData;
+        for (uint8_t val : yBitPlanes[i]) {
+            bitPlaneData.push_back(val * 255);
+        }
+        ycbcrBmp.save_file(fname + "_Y" + std::to_string(i) + "_bit_plane", bitPlaneData);
+    }
+}
+
 
 
 

@@ -1,6 +1,8 @@
 #include <valarray>
 #include "correlation.h"
 
+#include <map>
+
 double BMP::calculate_mathematical_expectation(char component) const {
     if (_info_header.bi_width == 0 || _info_header.bi_height == 0) {
         throw std::runtime_error("Image dimensions are invalid.");
@@ -166,6 +168,7 @@ int BMP::get_component_index(char component) {
 
     return component_index;
 }
+
 
 
 
